@@ -1,9 +1,8 @@
 package com.stefano.bookingAPI.service;
 
 import java.math.BigDecimal;
-import java.util.List;
-
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,21 @@ public class PropertyService {
         this.mapper = mapper;
     }
 
-    public List<PropertyResponse> findProperties (String city,BigDecimal minPrice,BigDecimal maxPrice){
-        Specification<Property> spec = Specification.where(PropertySpecification.hasCity(city))
-        .and(PropertySpecification.priceBetween(minPrice, maxPrice));
-        List<Property> results = repository.findAll(spec);
-        List<PropertyResponse> properties = results.stream().map(mapper::toDto).toList();
+    public Page<PropertyResponse> findProperties (String city,BigDecimal minPrice,BigDecimal maxPrice,Pageable pageable){
+        Specification<Property> spec = Specification.unrestricted();
+        if (city != null) {
+            spec = spec.and(PropertySpecification.hasCity(city));
+        }
+
+        if (minPrice != null) {
+            spec = spec.and(PropertySpecification.priceGreaterThanOrEqual(minPrice));
+        }
+
+        if (maxPrice != null) {
+            spec = spec.and(PropertySpecification.priceLessThanOrEqual(maxPrice));
+        }
+        Page<Property> results = repository.findAll(spec, pageable);
+        Page<PropertyResponse> properties = results.map(mapper::toDto);
         return properties;
     }
 

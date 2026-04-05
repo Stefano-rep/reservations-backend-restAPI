@@ -38,9 +38,9 @@ public class Property {
 
     int maxGuests;
 
-    @OneToMany(mappedBy = "booking",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property",fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    @OneToMany(mappedBy = "review",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "property",fetch = FetchType.LAZY)
     private List<Review> reviews;
 }

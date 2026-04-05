@@ -8,8 +8,6 @@ import com.stefano.bookingAPI.model.entity.Property;
 
 @Mapper(componentModel = "spring")
 public interface PropertyMapper {
-    PropertyMapper INSTANCE = Mappers.getMapper(PropertyMapper.class);
-
     Property toEntity(CreatePropertyRequest dto);
 
     PropertyResponse toDto (Property entity);
