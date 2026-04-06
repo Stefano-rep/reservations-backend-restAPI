@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.jmx.export.annotation.ManagedResource;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -43,4 +41,8 @@ public class Property {
 
     @OneToMany(mappedBy = "property",fetch = FetchType.LAZY)
     private List<Review> reviews;
+
+    public BigDecimal getPricePerNight() {
+        return pricePerNight;
+    }
 }

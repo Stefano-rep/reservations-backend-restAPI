@@ -1,4 +1,4 @@
-package com.stefano.order_management_api.auth;
+package com.stefano.bookingAPI.auth;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -6,10 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stefano.order_management_api.model.dto.LoginRequest;
-import com.stefano.order_management_api.model.dto.LoginResponse;
-import com.stefano.order_management_api.model.dto.RefreshTokenRequest;
-import com.stefano.order_management_api.model.dto.RegisterUserRequest;
+import com.stefano.bookingAPI.model.dto.LoginRequest;
+import com.stefano.bookingAPI.model.dto.LoginResponse;
+import com.stefano.bookingAPI.model.dto.RegisterUserRequest;
 
 import jakarta.validation.Valid;
 
@@ -34,14 +33,4 @@ public class AuthController {
         return ResponseEntity.ok("User registered successfully");
     }
 
-    @PostMapping("/refresh")
-    public ResponseEntity<String> refresh(@RequestBody RefreshTokenRequest request){
-        return ResponseEntity.ok(authService.refresh(request.getToken()));
-    }
-
-    @PostMapping("/logout")
-    public ResponseEntity<Void> logout(@RequestBody RefreshTokenRequest request){
-        authService.logout(request.getToken());
-        return ResponseEntity.ok().build();
-    } 
 }

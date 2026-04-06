@@ -1,11 +1,12 @@
-package com.stefano.order_management_api.security;
+package com.stefano.bookingAPI.security;
 
 import java.security.Key;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.stefano.order_management_api.model.entity.User;
+import com.stefano.bookingAPI.model.entity.User;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -14,9 +15,12 @@ import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
-    private final String SECRET_KEY = "your_secret_key_here"; 
+
+    @Value("${jwt.secret}")
+    private String SECRET_KEY; 
     
-    private final long ACCESS_EXPIRATION = 1000 * 60 * 15;
+    @Value("${jwt.expiration}")
+    private long ACCESS_EXPIRATION;
 
     private Key getSignKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());

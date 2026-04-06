@@ -2,7 +2,6 @@ package com.stefano.bookingAPI.config;
 
 import java.math.BigDecimal;
 
-import org.springframework.beans.factory.BeanRegistry.Spec;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.stefano.bookingAPI.model.entity.Property;

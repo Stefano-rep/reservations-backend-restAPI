@@ -1,15 +1,14 @@
-package com.stefano.order_management_api.auth;
+package com.stefano.bookingAPI.auth;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.stefano.order_management_api.model.dto.LoginResponse;
-import com.stefano.order_management_api.model.entity.RefreshToken;
-import com.stefano.order_management_api.model.entity.User;
-import com.stefano.order_management_api.model.enums.Role;
-import com.stefano.order_management_api.repository.UserRepository;
-import com.stefano.order_management_api.security.JwtService;
-import com.stefano.order_management_api.service.RefreshTokenService;
+import com.stefano.bookingAPI.model.dto.LoginResponse;
+import com.stefano.bookingAPI.model.entity.User;
+import com.stefano.bookingAPI.model.entity.Role;
+import com.stefano.bookingAPI.repository.UserRepository;
+import com.stefano.bookingAPI.security.JwtService;
+
 
 @Service    
 public class AuthService {
@@ -17,13 +16,11 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final RefreshTokenService refreshTokenService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService,RefreshTokenService refreshTokenService) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
-        this.refreshTokenService = refreshTokenService;
     }
 
     public LoginResponse login(String email, String password) {
@@ -33,20 +30,8 @@ public class AuthService {
             throw new RuntimeException("Invalid credentials");
         }
         String accessToken = jwtService.generateToken(user);
-        RefreshToken refreshToken = refreshTokenService.createRefrehToken(user);
 
-        return new LoginResponse(accessToken,refreshToken.getToken());
-    }
-
-    public String refresh(String refreshToken){
-        RefreshToken token = refreshTokenService.verify(refreshToken);
-        User user = token.getUser();
-        return jwtService.generateToken(user);
-    }
-
-    public void logout(String refreshToken){
-        RefreshToken token = refreshTokenService.verify(refreshToken);
-        refreshTokenService.deleteByUser(token.getUser());
+        return new LoginResponse(accessToken);
     }
 
     public void register(String email,String name, String password) {

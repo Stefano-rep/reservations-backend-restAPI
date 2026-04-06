@@ -1,6 +1,6 @@
-package com.stefano.order_management_api.model.dto;
+package com.stefano.bookingAPI.model.dto;
 
-import com.stefano.order_management_api.validation.PasswordConstraint;
+import com.stefano.bookingAPI.validation.PasswordConstraint;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

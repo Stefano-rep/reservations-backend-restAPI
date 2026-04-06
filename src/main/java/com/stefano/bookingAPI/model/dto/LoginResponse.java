@@ -1,4 +1,4 @@
-package com.stefano.order_management_api.model.dto;
+package com.stefano.bookingAPI.model.dto;
 
 import lombok.Data;
 
@@ -6,10 +6,8 @@ import lombok.Data;
 @Data
 public class LoginResponse {
     private String accessToken;
-    private String refreshToken;
 
-    public LoginResponse(String accessToken,String refreshToken){
+    public LoginResponse(String accessToken){
         this.accessToken = accessToken;
-        this.refreshToken = refreshToken;
     }
 }
