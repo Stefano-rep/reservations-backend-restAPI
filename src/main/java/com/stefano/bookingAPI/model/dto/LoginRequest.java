@@ -1,4 +1,4 @@
-package com.stefano.order_management_api.model.dto;
+package com.stefano.bookingAPI.model.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

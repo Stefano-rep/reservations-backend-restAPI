@@ -1,4 +1,4 @@
-package com.stefano.order_management_api.security;
+package com.stefano.bookingAPI.security;
 
 import java.io.IOException;
 import java.util.List;

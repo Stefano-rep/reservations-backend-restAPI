@@ -1,7 +1,7 @@
 package com.stefano.bookingAPI.model.entity;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;
@@ -30,14 +30,26 @@ public class Booking {
     @JoinColumn(name = "property_id")
     Property property;
 
-    Date startDate;
+    LocalDate startDate;
 
-    Date endDate;
+    LocalDate endDate;
 
     @Positive
     BigDecimal totalPrice;
 
     @Enumerated(EnumType.STRING)
     Status status;
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 
 }

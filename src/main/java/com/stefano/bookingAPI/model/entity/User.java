@@ -42,4 +42,32 @@ public class User {
 
     @OneToMany(mappedBy = "owner",fetch = FetchType.LAZY)
     private List<Property> properties;
+
+    public User(String email, String name, String password, Role role) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
 }

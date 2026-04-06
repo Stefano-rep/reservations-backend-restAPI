@@ -2,8 +2,6 @@ package com.stefano.bookingAPI.model.entity;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

@@ -1,6 +1,8 @@
 package com.stefano.bookingAPI.service;
 
 import java.math.BigDecimal;
+import java.util.UUID;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -44,5 +46,9 @@ public class PropertyService {
     public void createProperty(CreatePropertyRequest request){
         Property property = mapper.toEntity(request);
         repository.save(property);
+    }
+
+    public void deleteProperty(UUID id){
+        repository.deleteById(id);
     }
 }
